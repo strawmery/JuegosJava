@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Random;
 public class Ahorcado {
 
@@ -19,6 +20,9 @@ public class Ahorcado {
             ocultar[i] = '_';
             letrasAdivinadas[i] = false;
          }
+
+         //creo un arraylist que guardara las letras incorrectas introducidas por el usuario
+          ArrayList <Character> letrasIncorrectas = new ArrayList<Character>();
 
         while(intentos < 6){
     
@@ -43,12 +47,17 @@ public class Ahorcado {
             //comprueba si has acertado la letra y en ese caso printea un mensaje si no printea otro mensaje y te dice cuantos intentos te quedan
             if(acertada){
                 System.out.println("has acertado la letra!");
-            }if(!acertada){
-                intentos ++;
-                System.out.println("la letra es incorrecta te quedan "+(6 - intentos)+" aciertos");
+            }else{
+                if(!letrasIncorrectas.contains(letra)){
+                    letrasIncorrectas.add(letra);
+                    intentos ++;
+                    System.out.println("la letra es incorrecta te quedan "+(6 - intentos)+" aciertos");
+                }else{
+                    System.out.println("ya has introducido esta letra incorrecta antes. ");
+                }
             }
 
-            
+            System.out.println("letras incorrectas introducidas: "+letrasIncorrectas);
 
             //commprobacion de si todas las letras estan adivinadas
             boolean todasAdivinadas = false;
@@ -66,15 +75,68 @@ public class Ahorcado {
             }
 
             // si agotas los intentos aparece el muneco ahorcado y un mensaje de perdiste
-            if(intentos == 6){
-                System.out.println("_____   ");
-                System.out.println("|   |   ");
-                System.out.println("|   0   ");
-                System.out.println("|  /|\\ ");
-                System.out.println("|   |   ");
-                System.out.println("|  / \\ ");
-                System.out.println("|_______");
-                System.err.println("has perdido el juego ha terminado la palabra que debias adivinar era "+ ahorcado);
+            switch (intentos) {
+                case 1:
+                        System.out.println("_____");
+                        System.out.println("|   |");
+                        System.out.println("|   0");
+                        System.out.println("|    ");
+                        System.out.println("|    ");
+                        System.out.println("|    ");
+                        System.out.println("|_____");
+
+                    break;
+            
+                case 2:
+                        System.out.println("_____");
+                        System.out.println("|   |");
+                        System.out.println("|   0");
+                        System.out.println("|   |");
+                        System.out.println("|    ");
+                        System.out.println("|    ");
+                        System.out.println("|_____");
+                    break;
+
+                case 3:
+                        System.out.println("_____");
+                        System.out.println("|   |");
+                        System.out.println("|   0");
+                        System.out.println("|  /|");
+                        System.out.println("|    ");
+                        System.out.println("|    ");
+                        System.out.println("|_____");
+                    break;
+                
+                case 4:
+                        System.out.println("_____");
+                        System.out.println("|   |");
+                        System.out.println("|   0");
+                        System.out.println("|  /|\\");
+                        System.out.println("|    ");
+                        System.out.println("|    ");
+                        System.out.println("|_____");
+                    break;
+                    
+                case 5:
+                        System.out.println("_____");
+                        System.out.println("|   |");
+                        System.out.println("|   0");
+                        System.out.println("|  /|\\");
+                        System.out.println("|  / ");
+                        System.out.println("|    ");
+                        System.out.println("|_____");
+                    break;
+                    
+                case 6:
+                        System.out.println("_____");
+                        System.out.println("|   |");
+                        System.out.println("|   0");
+                        System.out.println("|  /|\\");
+                        System.out.println("|  / \\");
+                        System.out.println("|     ");
+                        System.out.println("|_____");
+                        System.out.println("has perdido, la parabra que debias adivinar era "+ ahorcado);
+                    break;
             }
         }
         
