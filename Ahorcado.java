@@ -1,9 +1,9 @@
-import java.util.*;
-
+import java.util.Scanner;
+import java.util.Random;
 public class Ahorcado {
 
     public static void main(String[] args) {
-        Scanner sc = Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         Random random =new Random();
         int intentos = 0;
         String[] Palabras = {"escalar", "gigante", "lectura", "castillo", "sensible", "propuesta", "sesiones", "desafío", 
@@ -12,43 +12,72 @@ public class Ahorcado {
         String ahorcado = Palabras[random.nextInt(20)];
         Boolean [] letrasAdivinadas = new Boolean[ahorcado.length()];
 
-        //pedir letra a usuario
-        System.out.println("introduce una letra ");
-        char letra = sc.nextLine().charAt(0);
-        boolean acertada = false;
+         //sustituir las letras por guiones y poner las letras acertadas en los guiones
+         char [] ocultar = new char[ahorcado.length()];
 
-        //comprobacion de de si la letra se ecuentra en la palabra elegida por el programa
-        for(int i = 0; i < ahorcado.length(); i++){
-            if(ahorcado.charAt(i) == letra){
-                acertada = true;
+         for(int i = 0; i < ahorcado.length(); i++){
+            ocultar[i] = '_';
+            letrasAdivinadas[i] = false;
+         }
+
+        while(intentos < 6){
+    
+            //pedir letra a usuario
+            System.out.println("introduce una letra ");
+            char letra = sc.nextLine().charAt(0);
+            boolean acertada = false;
+            
+
+            //comprobacion de de si la letra se ecuentra en la palabra elegida por el programa
+            for(int i = 0; i < ahorcado.length(); i++){
+                if(ahorcado.charAt(i) == letra){
+                    ocultar[i] = letra;
+                    letrasAdivinadas[i] = true;
+                    acertada = true;
+                }
             }
 
+            //muestra elprogreso y las letras acertadas
+                System.out.println(ocultar);
+
+            //comprueba si has acertado la letra y en ese caso printea un mensaje si no printea otro mensaje y te dice cuantos intentos te quedan
             if(acertada){
                 System.out.println("has acertado la letra!");
-            }else{
+            }if(!acertada){
                 intentos ++;
                 System.out.println("la letra es incorrecta te quedan "+(6 - intentos)+" aciertos");
             }
-        }
 
-        //commprobacion de si todas las letras estan adivinadas
-        boolean todasAdivinadas = false;
+            
 
-        for(boolean adivina: letrasAdivinadas){
-            if(!adivina){
-                todasAdivinadas = false;
-                break;
+            //commprobacion de si todas las letras estan adivinadas
+            boolean todasAdivinadas = false;
+
+            for(int i = 0; i < letrasAdivinadas.length; i++){
+                if(!letrasAdivinadas[i]){
+                    todasAdivinadas = false;
+                    break;
+                }
+            }
+            //al adivinar la palabra completa se reproduce el siguiente mensaje
+            if(todasAdivinadas){
+                todasAdivinadas = true;
+                System.out.println("enhorabuena has adivinado la palabra!");
+            }
+
+            // si agotas los intentos aparece el muneco ahorcado y un mensaje de perdiste
+            if(intentos == 6){
+                System.out.println("_____   ");
+                System.out.println("|   |   ");
+                System.out.println("|   0   ");
+                System.out.println("|  /|\\ ");
+                System.out.println("|   |   ");
+                System.out.println("|  / \\ ");
+                System.out.println("|_______");
+                System.err.println("has perdido el juego ha terminado la palabra que debias adivinar era "+ ahorcado);
             }
         }
-        //al adivinar la palabra completa se reproduce el siguiente mensaje
-        if(todasAdivinadas){
-            todasAdivinadas = true;
-            System.out.println("enhorabuena has adivinado la palabra!");
-        }
-
-        if(intentos == 6){
-            
-        }
         
+    sc.close();
     }
 }
