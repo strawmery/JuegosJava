@@ -22,6 +22,6 @@ public class AdivinaNumero {
                 System.out.println("has usado "+intentos+" intentos");
             }
         }
-       
+        
     }
 }
