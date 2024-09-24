@@ -7,10 +7,37 @@ public class Ahorcado {
         Scanner sc = new Scanner(System.in);
         Random random =new Random();
         int intentos = 0;
-        String[] Palabras = {"escalar", "gigante", "lectura", "castillo", "sensible", "propuesta", "sesiones", "desafío", 
-        "objetivo", "elevado", "esquivar", "poderoso", "esencia", "misterio", "perdido", "entorno", "vacante", "distancia", "ventana", 
-        "observar"};
-        String ahorcado = Palabras[random.nextInt(20)];
+        String[] Palabras = {"entorno", "lectura", "gigante", "castillo", "sensible", "propuesta", "desafío", 
+        "objetivo", "elevado", "esquivar", "poderoso", "esencia", "misterio", "perdido", "distancia", "vacante",
+         "ventana", "observar", "gigantes", "escalera", "sistemas", "proyectos", "estudios", "sociedad", 
+         "relación", "económico", "empleado", "navegador", "métodos", "tecnología", "historia", "cultura", 
+         "naturales", "exterior", "gobierno", "energías", "población", "cohesión", "naciones", "universo", 
+         "galaxias", "proteína", "organismo", "minerales", "exclusivo", "desafíos", "planetas", "astronomía", 
+         "evidente", "creación", "relativa", "resistencia", "resolución", "empleados", "vulnerable", "regiones",
+          "dinámico", "recurrente", "transformar", "colectivo", "variables", "educación", "propuesta", 
+          "integral", "colectivos", "experiencia", "tendencia", "creciente", "creadores", "mecánico", "competir",
+           "completar", "expansión", "inversión", "operativo", "evaluación", "teoría", "estrategia", 
+           "industrial", "complejo", "construir", "evaluación", "modernidad", "tradición", "manifiesto", 
+           "simétrico", "aplicación", "verificable", "reconocer", "dominante", "transporte", "reparación", 
+           "optimización", "estructura", "fenómeno", "variables", "ejercicios", "continuo", "inclusión", 
+           "mercados", "regulatorio", "significado", "asociación", "algoritmo", "interior", "simétrico", 
+           "implementación", "concreción", "transacción", "exclusión", "valores", "infinitos", "materiales",
+            "constante", "radicales", "significado", "adecuado", "voluntario", "sustancial", "presupuesto",
+            "disciplinar", "colectivo", "empresarial", "procesador", "activación", "esquemas", "concepción",
+            "personalidad", "finalidad", "visibilidad", "competencia", "privilegio", "mecánicas", "inversión",
+            "producción", "herramientas", "algoritmos", "efectividad", "análisis", "evolución", 
+            "procesamiento", "libertades", "justificación", "limitación", "orientación", "específico",
+            "operaciones", "regulaciones", "parámetros", "cualitativo", "profundidad", "automatización",
+            "sustentable", "vigilancia", "diseñador", "mantenimiento", "expresiones", "determinante",
+            "articulación", "colaboración", "instrumento", "decisiones", "crecimiento", "universales",
+            "prácticas", "transferencia", "formación", "constitución", "aplicaciones", "tecnológicas",
+            "coherencia", "producciones", "contextos", "dinámicas", "preferencias", "innovación", 
+            "evaluaciones", "sincronización", "verificación", "perspectiva", "programación",
+            "equivalentes", "funcionales", "administración", "inteligente", "experimentar",
+            "procesamiento", "planificación", "procedimientos", "consolidación", "representación",
+            "tecnologías", "publicación", "determinados", "simplificación"
+};
+        String ahorcado = Palabras[random.nextInt(200)];
         Boolean [] letrasAdivinadas = new Boolean[ahorcado.length()];
 
          //sustituir las letras por guiones y poner las letras acertadas en los guiones
