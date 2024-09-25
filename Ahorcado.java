@@ -7,36 +7,36 @@ public class Ahorcado {
         Scanner sc = new Scanner(System.in);
         Random random =new Random();
         int intentos = 0;
-        String[] Palabras = {"entorno", "lectura", "gigante", "castillo", "sensible", "propuesta", "desafío", 
-        "objetivo", "elevado", "esquivar", "poderoso", "esencia", "misterio", "perdido", "distancia", "vacante",
-         "ventana", "observar", "gigantes", "escalera", "sistemas", "proyectos", "estudios", "sociedad", 
-         "relación", "económico", "empleado", "navegador", "métodos", "tecnología", "historia", "cultura", 
-         "naturales", "exterior", "gobierno", "energías", "población", "cohesión", "naciones", "universo", 
-         "galaxias", "proteína", "organismo", "minerales", "exclusivo", "desafíos", "planetas", "astronomía", 
-         "evidente", "creación", "relativa", "resistencia", "resolución", "empleados", "vulnerable", "regiones",
-          "dinámico", "recurrente", "transformar", "colectivo", "variables", "educación", "propuesta", 
-          "integral", "colectivos", "experiencia", "tendencia", "creciente", "creadores", "mecánico", "competir",
-           "completar", "expansión", "inversión", "operativo", "evaluación", "teoría", "estrategia", 
-           "industrial", "complejo", "construir", "evaluación", "modernidad", "tradición", "manifiesto", 
-           "simétrico", "aplicación", "verificable", "reconocer", "dominante", "transporte", "reparación", 
-           "optimización", "estructura", "fenómeno", "variables", "ejercicios", "continuo", "inclusión", 
-           "mercados", "regulatorio", "significado", "asociación", "algoritmo", "interior", "simétrico", 
-           "implementación", "concreción", "transacción", "exclusión", "valores", "infinitos", "materiales",
-            "constante", "radicales", "significado", "adecuado", "voluntario", "sustancial", "presupuesto",
-            "disciplinar", "colectivo", "empresarial", "procesador", "activación", "esquemas", "concepción",
-            "personalidad", "finalidad", "visibilidad", "competencia", "privilegio", "mecánicas", "inversión",
-            "producción", "herramientas", "algoritmos", "efectividad", "análisis", "evolución", 
-            "procesamiento", "libertades", "justificación", "limitación", "orientación", "específico",
-            "operaciones", "regulaciones", "parámetros", "cualitativo", "profundidad", "automatización",
-            "sustentable", "vigilancia", "diseñador", "mantenimiento", "expresiones", "determinante",
-            "articulación", "colaboración", "instrumento", "decisiones", "crecimiento", "universales",
-            "prácticas", "transferencia", "formación", "constitución", "aplicaciones", "tecnológicas",
-            "coherencia", "producciones", "contextos", "dinámicas", "preferencias", "innovación", 
-            "evaluaciones", "sincronización", "verificación", "perspectiva", "programación",
-            "equivalentes", "funcionales", "administración", "inteligente", "experimentar",
-            "procesamiento", "planificación", "procedimientos", "consolidación", "representación",
-            "tecnologías", "publicación", "determinados", "simplificación"
-};
+        String[] Palabras = {"entorno", "lectura", "gigante", "castillo", "sensible", "propuesta", "desafio", 
+                    "objetivo", "elevado", "esquivar", "poderoso", "esencia", "misterio", "perdido", "distancia", "vacante",
+                    "ventana", "observar", "gigantes", "escalera", "sistemas", "proyectos", "estudios", "sociedad", 
+                    "relacion", "economico", "empleado", "navegador", "metodos", "tecnologia", "historia", "cultura", 
+                    "naturales", "exterior", "gobierno", "energias", "poblacion", "cohesion", "naciones", "universo", 
+                    "galaxias", "proteina", "organismo", "minerales", "exclusivo", "desafios", "planetas", "astronomia", 
+                    "evidente", "creacion", "relativa", "resistencia", "resolucion", "empleados", "vulnerable", "regiones",
+                    "dinamico", "recurrente", "transformar", "colectivo", "variables", "educacion", "propuesta", 
+                    "integral", "colectivos", "experiencia", "tendencia", "creciente", "creadores", "mecanico", "competir",
+                    "completar", "expansion", "inversion", "operativo", "evaluacion", "teoria", "estrategia", 
+                    "industrial", "complejo", "construir", "evaluacion", "modernidad", "tradicion", "manifiesto", 
+                    "simettrico", "aplicacion", "verificable", "reconocer", "dominante", "transporte", "reparacion", 
+                    "optimizacion", "estructura", "fenomeno", "variables", "ejercicios", "continuo", "inclusion", 
+                    "mercados", "regulatorio", "significado", "asociacion", "algoritmo", "interior", "simetrico", 
+                    "implementacion", "concrecion", "transaccion", "exclusion", "valores", "infinitos", "materiales",
+                    "constante", "radicales", "significado", "adecuado", "voluntario", "sustancial", "presupuesto",
+                    "disciplinar", "colectivo", "empresarial", "procesador", "activacion", "esquemas", "concepcion",
+                    "personalidad", "finalidad", "visibilidad", "competencia", "privilegio", "mecanicas", "inversion",
+                    "produccion", "herramientas", "algoritmos", "efectividad", "analisis", "evolucion", 
+                    "procesamiento", "libertades", "justificacion", "limitacion", "orientacion", "especifico",
+                    "operaciones", "regulaciones", "parametros", "cualitativo", "profundidad", "automatizacion",
+                    "sustentable", "vigilancia", "disenador", "mantenimiento", "expresiones", "determinante",
+                    "articulacion", "colaboracion", "instrumento", "decisiones", "crecimiento", "universales",
+                    "practicas", "transferencia", "formacion", "constitucion", "aplicaciones", "tecnologicas",
+                    "coherencia", "producciones", "contextos", "dinamicas", "preferencias", "innovacion", 
+                    "evaluaciones", "sincronizacion", "verificacion", "perspectiva", "programacion",
+                    "equivalentes", "funcionales", "administracion", "inteligente", "experimentar",
+                    "procesamiento", "planificacion", "procedimientos", "consolidacion", "representacion",
+                    "tecnologias", "publicacion", "determinados", "simplificacion"};
+            
         String ahorcado = Palabras[random.nextInt(200)];
         Boolean [] letrasAdivinadas = new Boolean[ahorcado.length()];
 
@@ -53,10 +53,22 @@ public class Ahorcado {
 
         while(intentos < 6){
     
-            //pedir letra a usuario
-            System.out.println("introduce una letra ");
-            char letra = sc.nextLine().charAt(0);
-            boolean acertada = false;
+             // Pedir letra al usuario y asegurarse de que introduce una letra válida
+             char letra = ' ';
+             boolean acertada = false;
+ 
+             while (!acertada) {
+                 System.out.println("Introduce una letra: ");
+                 String input = sc.nextLine().trim();
+ 
+                 if (input.length() == 0) {
+                     System.out.println("Error: no has introducido ninguna letra. Inténtalo de nuevo.");
+                 } else {
+                     letra = input.charAt(0);
+                     acertada = true;
+                 }
+             }
+            
             
 
             //comprobacion de de si la letra se ecuentra en la palabra elegida por el programa
@@ -87,7 +99,7 @@ public class Ahorcado {
             System.out.println("letras incorrectas introducidas: "+letrasIncorrectas);
 
             //commprobacion de si todas las letras estan adivinadas
-            boolean todasAdivinadas = false;
+            boolean todasAdivinadas = true;
 
             for(int i = 0; i < letrasAdivinadas.length; i++){
                 if(!letrasAdivinadas[i]){
@@ -95,10 +107,11 @@ public class Ahorcado {
                     break;
                 }
             }
-            //al adivinar la palabra completa se reproduce el siguiente mensaje
-            if(todasAdivinadas){
-                todasAdivinadas = true;
-                System.out.println("enhorabuena has adivinado la palabra!");
+
+            // Si todas las letras fueron adivinadas, terminar el juego
+            if (todasAdivinadas) {
+                System.out.println("¡Enhorabuena! Has adivinado la palabra: " + ahorcado);
+                break;
             }
 
             // si agotas los intentos aparece el muneco ahorcado y un mensaje de perdiste

@@ -3,12 +3,12 @@ import java.util.*;
 
 public class Sudoku {
     
-    public static void VerTablero (int [][] Tablero){
-        for(int i = 0; i < 9; i++){
-            for(int j = 0; j < 9; j++){
+    public static void VerTablero (int [][] Tablero, int size){
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
                 System.out.print(Tablero[i][j] == 0 ? " . " : " " + Tablero[i][j] + " ");//recorre las filas y columnas del tablero y las muestra
                 
-                if((j + 1) % 3 == 0 && j != 8){ //comprueba las dimensiones de las columnas e imprime un separador cada 3 columnas 
+                if((j + 1) % 3 == 0 && j != size - 1){ //comprueba las dimensiones de las columnas e imprime un separador cada 3 columnas 
                     System.out.print("|");
                 }
             }
@@ -19,33 +19,32 @@ public class Sudoku {
         }
     }
 
-    public static boolean VerificarNumero(int[][] Tablero, int fila, int col, int num){
-        for(int i = 0; i < 9; i++){//recorre las filas comprobando si el numero introducido se encuentra en la misma fila
-            if(Tablero[fila][i] == num){
+    public static boolean VerificarNumero(int[][] Tablero, int fila, int col, int num, int size) {
+        for (int i = 0; i < size; i++) {
+            if (Tablero[fila][i] == num) {
                 return false;
             }
         }
-        for(int j = 0; j < 9; j++){//recorre las columnas comprobando si el numero introducido se repite en la misma columna
-            if(Tablero[j][col] == num){
+        for (int j = 0; j < size; j++) {
+            if (Tablero[j][col] == num) {
                 return false;
             }
         }
         
-        int iniFila = fila - fila % 3;
-        int iniCol = col - col % 3;
-        for (int i = iniFila; i < iniFila + 3; i++) { // Desde iniFila hasta iniFila + 3
-            for (int j = iniCol; j < iniCol + 3; j++) { // Desde iniCol hasta iniCol + 3
+        int iniFila = fila - fila % (size / 3);
+        int iniCol = col - col % (size / 3);
+        for (int i = iniFila; i < iniFila + (size / 3); i++) {
+            for (int j = iniCol; j < iniCol + (size / 3); j++) {
                 if (Tablero[i][j] == num) {
                     return false;
                 }
             }
         }
-
         return true;
     }
 
-    public static boolean introducirNumero(int [][] Tablero, int fila, int col, int num){
-        if(VerificarNumero(Tablero, fila, col, num)){//verifica si el numero se puede introducir y en ese caso lo introduce
+    public static boolean introducirNumero(int [][] Tablero, int fila, int col, int num, int size){
+        if(VerificarNumero(Tablero, fila, col, num, size)){//verifica si el numero se puede introducir y en ese caso lo introduce
             Tablero[fila][col] = num;
             return true;
         }else{// si el movimiento no es valido manda un mensaje
@@ -54,40 +53,36 @@ public class Sudoku {
         }
     }
 
-    public static boolean backtracking(int[][] Tablero) {
-        for (int fila = 0; fila < 9; fila++) {
-            for (int col = 0; col < 9; col++) {
+    public static boolean backtracking(int[][] Tablero, int size) {
+        for (int fila = 0; fila < size; fila++) {
+            for (int col = 0; col < size; col++) {
                 if (Tablero[fila][col] == 0) {
-                    for (int num = 1; num <= 9; num++) {
-                        if (VerificarNumero(Tablero, fila, col, num)) {
+                    for (int num = 1; num <= size; num++) {
+                        if (VerificarNumero(Tablero, fila, col, num, size)) {
                             Tablero[fila][col] = num;
-    
-                            if (backtracking(Tablero)) {
-                                return true; // si el numero es correcto se resuelve y devuelve true
+
+                            if (backtracking(Tablero, size)) {
+                                return true; 
                             }
-    
-                            Tablero[fila][col] = 0; // Si no se resuelve vacia la celda
+
+                            Tablero[fila][col] = 0; 
                         }
                     }
-                    return false; // si el numero no es valido y no puede llenar la celda devuelve false
+                    return false; 
                 }
             }
         }
-        return true; // si ha comppletado todas las celdas el sudoku esta completado
+        return true; 
     }
-
-    public static void GenerarSudoku(int[][] Tablero, int CeldaVacia ){
+    public static void GenerarSudoku(int[][] Tablero, int CeldaVacia, int size ){
         Random random = new Random();
         
-        backtracking(Tablero);//resuleve el sudoku
+        backtracking(Tablero, size);//resuleve el sudoku
 
         //recorre el tablero y elimina numeros aleatorios para que el usuario pueda hacerlo
         for (int i = 0; i < CeldaVacia; i++) {
-            int fila, col;
-            do {
-                fila = random.nextInt(9);
-                col = random.nextInt(9);
-            } while (Tablero[fila][col] == 0); // Repite hasta encontrar una celda no vacía
+            int fila = random.nextInt(size);
+            int col = random.nextInt(size);
             Tablero[fila][col] = 0;
         }
     }
@@ -98,26 +93,55 @@ public class Sudoku {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int [][] Tablero = new int[9][9]; //creamos un tablero de 9 x 9 
-        int col, fila, num;
-        //generamos un sudoku
-        GenerarSudoku(Tablero, 30);
+        System.out.println("seleccione el nivel de dificultad en qle que quiere jugar: ");
+        System.out.println("1.Facil");
+        System.out.println("2.Normal");
+        System.out.println("3.Dificil");
+        int dificultad = sc.nextInt();
+        int size = 0;
+        int CeldaVacia = 0;
 
-        //mostramos el sudoku
-        VerTablero(Tablero);
+        switch (dificultad) {
+            case 1:
+                size = 3;
+                CeldaVacia = 4;
+                break;
+
+            case 2:
+                size = 6;
+                CeldaVacia = 15;
+                break;
+            
+            case 3:
+                size = 9;
+                CeldaVacia = 30;
+                break;
+        
+            default: 
+                System.out.println("dificultad introdiucida invalida, nivel establecido por defecto: ");
+                size = 9;
+                CeldaVacia = 30;
+                break;
+        }
+
+        int[][] Tablero = new int[size][size]; // Crear el tablero por dificltad
+        
+        // Generar el Sudoku
+        GenerarSudoku(Tablero, CeldaVacia, size);
+
+        // Mostrar el Sudoku
+        VerTablero(Tablero, size);
 
         while (true) {
-            System.out.println("introduzca la columna (0-8): ");
-            col = sc.nextInt();
-            System.out.println("introduzca la fila (0-8): ");
-            fila = sc.nextInt();
-            System.err.println("introduce el numero (1-9): ");
-            num = sc.nextInt();
-        
-            if (col < 0 || col > 8 || fila < 0 || fila > 8 || num < 1 || num > 9) {
-                System.out.println("Valores fuera de rango. Por favor, inténtalo de nuevo.");
-            } else if (introducirNumero(Tablero, fila, col, num)) {
-                VerTablero(Tablero);
+            System.out.println("Introduce la columna: ");
+            int col = sc.nextInt();
+            System.out.println("Introduce la fila: ");
+            int fila = sc.nextInt();
+            System.out.println("Introduce el número: ");
+            int num = sc.nextInt();
+            
+            if (introducirNumero(Tablero, fila, col, num, size)) {
+                VerTablero(Tablero, size);
             }
         }
     }
