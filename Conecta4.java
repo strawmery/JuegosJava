@@ -41,20 +41,39 @@ public class Conecta4 {
         return false; // si no encuentro una posición para colocar la ficha retorno false
     }
 
+
+    
     //PASO 3: programa principal (método "main")
     public static void main(String[] args) {
         estadoInicial();
         estadoActual();
-        char jugador = j1;
+        char jugadorJugando = j1;
         boolean finalJuego = true; 
 
     while (finalJuego != true) {
         System.out.println("Presiona una tecla " + (jugador == j1 ? "Jugador 1" : "Jugador 2"));
-        int columna = leerColumna();
+        int columna = verificar();
 
-        if
+        if(!ponerFicha(columna, jugadorJugando)) {
+            System.out.println("Intenta otra columna.");
+            continue;
+        }
 
+        estadoActual();
+
+
+        
+
+    System.out.println("¿Jugar de nuevo? (s/n)");
+    if (sc.next().equalsIgnoreCase("s")) {
+        main(null);
+    }   else {
+        System.out.println("TE VERÉ MÁS TARDE.");
     }
+    }
+
+
+
 
 }
 
