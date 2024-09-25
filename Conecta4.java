@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Conecta4 {
+    
+
+    
     // PASO 1: declaración de variables
     public static int filas = 6, columnas = 7;
     public static char asterisco = '*', j1 = 'X', j2 = 'O';
@@ -29,7 +32,7 @@ public class Conecta4 {
     }
 
 
-    
+
     //PASO 3: programa principal (método "main")
 
     public static void main(String[] args) {
