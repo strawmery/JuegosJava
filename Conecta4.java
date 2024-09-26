@@ -13,13 +13,13 @@ public class Conecta4 {
 
 
     //PASO 2: métodos
-    public static void estadoInicial() {
+    public static void estadoInicial() { // inicializa el juego ???
         for (int f = 0, i < filas; i++)
             for (int c = 0, j < columnas; j++)
                 tablero[f][c] = asterisco;
     }
     
-    public static void estadoActual() {
+    public static void estadoActual() { // muestra el tablero con las jugadas
         for (int i = 0, i < filas; i++) {
             for (int j = 0, j < columnas; j++) {
                 System.out.println(tablero[i][j] + " ");
@@ -48,10 +48,37 @@ public class Conecta4 {
         return false; // si no encuentro una posición para colocar la ficha retorno false
     }
 
-    public static boolean verificarGanador(int fila, int columna, int jugador){
-        return(verificar)
+    private static boolean verificarGanador(int fila, int columna, char jugador) {
+        int[][] direcciones = {{1, 0}, {0, 1}, {1, 1}, {1, -1}};
+
+        for (int[] direccion : direcciones) {
+            int contador = 0;
+            for (int i = 0; i < 4; i++) {
+                int nuevaFila = fila + i * direccion[0];
+                int nuevaColumna = columna + i * direccion[1];
+                // Verificación directa sobre el tablero
+                if (0 <= nuevaFila && nuevaFila < filas && 0 <= nuevaColumna && nuevaColumna < columnas &&
+                    tablero[nuevaFila][nuevaColumna] == jugador) {
+                    contador++;
+                } else {
+                    break;
+                }
+                if (contador == 4) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
+    private static void reiniciarJuego() {
+        System.out.println("¿Jugar de nuevo? (s/n)");
+        if (sc.next().equalsIgnoreCase("s")) {
+            main(null);
+        }   else {
+            System.out.println("TE VERÉ MÁS TARDE.");
+        }
+    }
     
     //PASO 3: programa principal (método "main")
     public static void main(String[] args) {
@@ -74,12 +101,7 @@ public class Conecta4 {
 
         
 
-    System.out.println("¿Jugar de nuevo? (s/n)");
-    if (sc.next().equalsIgnoreCase("s")) {
-        main(null);
-    }   else {
-        System.out.println("TE VERÉ MÁS TARDE.");
-    }
+
     }
 
 
