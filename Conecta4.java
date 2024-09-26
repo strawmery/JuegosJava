@@ -100,18 +100,18 @@ public class Conecta4 {
     //PASO 3: programa principal (método "main")
     public static void main(String[] args) {
         estadoInicial();
-        
+
         char[] jugadores = {j1, j2};
         int jugadorActual = 0;
 
         while (!juegoTerminado) {
-            estadoActual();
             int columna = elegirColumna(jugadores[jugadorActual]);
             if (verificarColumna(columna)) {
                 int fila = ponerFicha(columna, jugadores[jugadorActual]);
                 if (fila == -1) {
                     System.out.println("No se puede colocar la ficha en esta columna. Intente de nuevo.");
                 } else {
+                    estadoActual();
                     if (verificarGanador(fila, columna, jugadores[jugadorActual]) || tableroLleno()) {
                         System.out.println("¡El juego ha terminado! " +
                                 (verificarGanador(fila, columna, jugadores[jugadorActual]) ?
@@ -130,3 +130,7 @@ public class Conecta4 {
         }
     }
 
+// corregir introducción de caracteres inválidos
+// añadir espacio para cada nueva impresión antes de estadoActual print un espacio
+/// Introducir los nombres de los jugadores
+// Aagregar Kevin o JUgador 1 seleccione columna para colocar ficha
