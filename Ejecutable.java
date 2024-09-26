@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ejecutable {
@@ -113,7 +114,7 @@ public class Ejecutable {
                 }
 
                 case 3 -> {
-                        System.out.println("                                     ");
+                       /* System.out.println("                                     ");
                         System.out.println("*****************************************");
                         System.out.println("*                                       *");
                         System.out.println("*     BIENVENIDO A CONECTA4 by Grupo8   *");
@@ -150,10 +151,45 @@ public class Ejecutable {
                                 System.out.println("Columna inválida. Intente de nuevo.");
                             }
                         }
-                        Conecta4.reiniciarJuego();
+                        Conecta4.reiniciarJuego();*/
                 }
                 
                 case 4 -> {
+                        String palabra = Ahorcado.elegirPalabra();
+                        char[] ocultarPalabra = Ahorcado.ocultar(palabra);
+                        Boolean[] letrasAdivinadas = new Boolean[palabra.length()];
+                        
+                        // Inicializar letras adivinadas a false
+                        for (int i = 0; i < palabra.length(); i++) {
+                            letrasAdivinadas[i] = false;
+                        }
+
+                        ArrayList<Character> letrasIncorrectas = new ArrayList<>();
+                        int intentos = 0;
+
+                        System.out.println("Bienvenido al Ahorcado");
+
+                        while (intentos < Ahorcado.MAX_INTENTOS) {
+                            Ahorcado.mostrarEstadoJuego(ocultarPalabra, letrasIncorrectas, intentos);
+                            char letra = Ahorcado.introducirLetra(sc);
+                            boolean acierto = Ahorcado.verificarLetra(palabra, letra, ocultarPalabra, letrasAdivinadas);
+
+                            if (!acierto) {
+                                intentos = Ahorcado.registrarLetraIncorrecta(letra, letrasIncorrectas, intentos);
+                            } else {
+                                System.out.println("¡Letra correcta!");
+                            }
+
+                            if (Ahorcado.todasAdivinadas(letrasAdivinadas)) {
+                                System.out.println("¡Has adivinado la palabra! Felicidades: " + palabra);
+                                break;
+                            }
+
+                            if (intentos == Ahorcado.MAX_INTENTOS) {
+                                System.out.println("Has perdido. La palabra correcta era: " + palabra);
+                                Ahorcado.dibujarMonigote(intentos);
+                            }
+                        }
                 }
                 default -> throw new AssertionError();
             }

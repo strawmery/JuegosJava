@@ -5,7 +5,7 @@ public class Conecta4 {
 
     
     // PASO 1: declaración de variables
-    public  static char j1 = 'X';
+    public static char j1 = 'X';
     public static char j2 = 'O';
     public static char[] jugadores = {j1, j2};
     public static int jugadorActual = 0;
