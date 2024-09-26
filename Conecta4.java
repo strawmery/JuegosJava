@@ -5,11 +5,13 @@ public class Conecta4 {
 
     
     // PASO 1: declaración de variables
+    private static char j1 = 'X';
+    private static char j2 = 'O';
+    private static char[] jugadores = {j1, j2};
+    private static int jugadorActual = 0;
     private static int filas = 6;
     private static int columnas = 7;
     private static char asterisco = '*';
-    private static char j1 = 'X';
-    private static char j2 = 'O';
     private static char[][] tablero = new char [filas][columnas];
     private static Scanner sc = new Scanner(System.in);
     private static boolean juegoTerminado = false;
@@ -38,7 +40,8 @@ public class Conecta4 {
     }
 
     public static int elegirColumna(char jugador) {
-        System.out.println("Elige una columna (0-6): ");
+        System.out.println(" ");
+        System.out.println("Jugador " + "(" + jugadores[jugadorActual] + ")" + " elija una columna (0-6): ");
         return sc.nextInt();
     }
 
@@ -53,7 +56,7 @@ public class Conecta4 {
                 return i;
             }
         } 
-        return -1; // si no encuentro una posición para colocar la ficha retorno false
+        return -1; 
     }
 
     private static boolean verificarGanador(int fila, int columna, char jugador) {
@@ -93,12 +96,20 @@ public class Conecta4 {
         if (sc.next().equalsIgnoreCase("s")) {
             main(null);
         }   else {
+            System.out.println(" "); 
             System.out.println("TE VERÉ MÁS TARDE.");
         }
     }
     
     //PASO 3: programa principal (método "main")
     public static void main(String[] args) {
+        System.out.println("                                     ");
+        System.out.println("*****************************************");
+        System.out.println("*                                       *");
+        System.out.println("*     BIENVENIDO A CONECTA4 by Grupo8   *");
+        System.out.println("*                                       *");
+        System.out.println("*****************************************");
+        System.out.println("                                     ");
         estadoInicial();
 
         char[] jugadores = {j1, j2};
@@ -111,11 +122,14 @@ public class Conecta4 {
                 if (fila == -1) {
                     System.out.println("No se puede colocar la ficha en esta columna. Intente de nuevo.");
                 } else {
+                    System.out.println(" ");
+                    System.out.println(" ");
                     estadoActual();
                     if (verificarGanador(fila, columna, jugadores[jugadorActual]) || tableroLleno()) {
+                        System.out.println(" "); 
                         System.out.println("¡El juego ha terminado! " +
                                 (verificarGanador(fila, columna, jugadores[jugadorActual]) ?
-                                        "Ha ganado " + jugadores[jugadorActual] :
+                                        "Ha ganado el jugador " + jugadores[jugadorActual] + "." :
                                         "Es un empate"));
                         juegoTerminado = true;
                     } else {
