@@ -24,11 +24,14 @@ public class Conecta4 {
 
     }
 
-    public static int verificar() {
-        int columna;
-        do {
-            System.out.print("Elige dónde insertar ficha (0-6): ");
-        }
+    public static int elegirColumna(char jugador) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Elige una columna (0-6): ");
+        return sc.nextInt();
+    }
+
+    public static boolean verificarColumna(int columna){
+        return columna >= 0 && columna < columnas && tablero[0][columna] == asterisco;
     }
 
     public static boolean ponerFicha(int columna, char ficha) {
@@ -41,6 +44,9 @@ public class Conecta4 {
         return false; // si no encuentro una posición para colocar la ficha retorno false
     }
 
+    public static boolean verificarGanador(int fila, int columna, int jugador){
+        return(verificar)
+    }
 
     
     //PASO 3: programa principal (método "main")
