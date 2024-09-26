@@ -5,10 +5,10 @@ public class Conecta4 {
 
     
     // PASO 1: declaración de variables
-    public static int filas = 6, columnas = 7;
-    public static char asterisco = '*', j1 = 'X', j2 = 'O';
-    public static char[][] tablero = new char [filas][columnas];
-    public static Scanner sc = new Scanner(System.in);
+    private static int filas = 6, columnas = 7;
+    private static char asterisco = '*', j1 = 'X', j2 = 'O';
+    private static char[][] tablero = new char [filas][columnas];
+    private static Scanner sc = new Scanner(System.in);
 
 
 
@@ -20,12 +20,16 @@ public class Conecta4 {
     }
     
     public static void estadoActual() {
-        for()
-
+        for (int i = 0, i < filas; i++) {
+            for (int j = 0, j < columnas; j++) {
+                System.out.println(tablero[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("0 1 2 3 4 5 6"); 
     }
 
-    public static int elegirColumna(char jugador) {
-        Scanner sc = new Scanner(System.in);
+    public static int elegirColumna(char jugador, Scanner sc) {
         System.out.println("Elige una columna (0-6): ");
         return sc.nextInt();
     }
