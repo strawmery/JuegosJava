@@ -5,16 +5,16 @@ public class Conecta4 {
 
     
     // PASO 1: declaración de variables
-    public static char j1 = 'X';
-    public static char j2 = 'O';
-    public static char[] jugadores = {j1, j2};
-    public static int jugadorActual = 0;
-    public static int filas = 6;
-    public static int columnas = 7;
-    public static char asterisco = '*';
-    public static char[][] tablero = new char [filas][columnas];
-    public static Scanner sc = new Scanner(System.in);
-    static boolean juegoTerminado = false;
+    private static char j1 = 'X';
+    private static char j2 = 'O';
+    private static char[] jugadores = {j1, j2};
+    private static int jugadorActual = 0;
+    private static int filas = 6;
+    private static int columnas = 7;
+    private static char asterisco = '*';
+    private static char[][] tablero = new char [filas][columnas];
+    private static Scanner sc = new Scanner(System.in);
+    private static boolean juegoTerminado = false;
 
 
 
@@ -42,6 +42,12 @@ public class Conecta4 {
     public static int elegirColumna(char jugador) {
         System.out.println(" ");
         System.out.println("Jugador " + "(" + jugadores[jugadorActual] + ")" + " elija una columna (0-6): ");
+        while (!sc.hasNextInt()) {
+            sc.next();
+            System.out.println(" ");
+            System.out.println("Por favor, jugador " + "(" + jugadores[jugadorActual] + ")" + " introduzca un número válido entre 0 y 6:");
+        }
+
         return sc.nextInt();
     }
 
@@ -59,7 +65,7 @@ public class Conecta4 {
         return -1; 
     }
 
-    public static boolean verificarGanador(int fila, int columna, char jugador) {
+    private static boolean verificarGanador(int fila, int columna, char jugador) {
         int[][] direcciones = {{1, 0}, {0, 1}, {1, 1}, {1, -1}};
         for (int[] direccion : direcciones) {
             int contador = 0;
@@ -80,7 +86,7 @@ public class Conecta4 {
         return false;
     }
 
-    public static boolean tableroLleno() {
+    private static boolean tableroLleno() {
         for (int i = 0; i < filas; i++) { 
             for (int j = 0; j < columnas; j++) { 
                 if (tablero[i][j] == asterisco) {
@@ -91,7 +97,7 @@ public class Conecta4 {
         return true; 
     }
 
-    public static void reiniciarJuego() {
+    private static void reiniciarJuego() {
         System.out.println("¿Jugar de nuevo? (s/n)");
         if (sc.next().equalsIgnoreCase("s")) {
             main(null);
@@ -143,8 +149,3 @@ public class Conecta4 {
         reiniciarJuego();
         }
     }
-
-// corregir introducción de caracteres inválidos
-// añadir espacio para cada nueva impresión antes de estadoActual print un espacio
-/// Introducir los nombres de los jugadores
-// Aagregar Kevin o JUgador 1 seleccione columna para colocar ficha
