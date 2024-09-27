@@ -143,8 +143,3 @@ public class Conecta4 {
         reiniciarJuego();
         }
     }
-
-// corregir introducción de caracteres inválidos
-// añadir espacio para cada nueva impresión antes de estadoActual print un espacio
-/// Introducir los nombres de los jugadores
-// Aagregar Kevin o JUgador 1 seleccione columna para colocar ficha
