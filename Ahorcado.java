@@ -1,172 +1,198 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
+
 public class Ahorcado {
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Random random =new Random();
-        int intentos = 0;
-        String[] Palabras = {"entorno", "lectura", "gigante", "castillo", "sensible", "propuesta", "desafío", 
-        "objetivo", "elevado", "esquivar", "poderoso", "esencia", "misterio", "perdido", "distancia", "vacante",
-         "ventana", "observar", "gigantes", "escalera", "sistemas", "proyectos", "estudios", "sociedad", 
-         "relación", "económico", "empleado", "navegador", "métodos", "tecnología", "historia", "cultura", 
-         "naturales", "exterior", "gobierno", "energías", "población", "cohesión", "naciones", "universo", 
-         "galaxias", "proteína", "organismo", "minerales", "exclusivo", "desafíos", "planetas", "astronomía", 
-         "evidente", "creación", "relativa", "resistencia", "resolución", "empleados", "vulnerable", "regiones",
-          "dinámico", "recurrente", "transformar", "colectivo", "variables", "educación", "propuesta", 
-          "integral", "colectivos", "experiencia", "tendencia", "creciente", "creadores", "mecánico", "competir",
-           "completar", "expansión", "inversión", "operativo", "evaluación", "teoría", "estrategia", 
-           "industrial", "complejo", "construir", "evaluación", "modernidad", "tradición", "manifiesto", 
-           "simétrico", "aplicación", "verificable", "reconocer", "dominante", "transporte", "reparación", 
-           "optimización", "estructura", "fenómeno", "variables", "ejercicios", "continuo", "inclusión", 
-           "mercados", "regulatorio", "significado", "asociación", "algoritmo", "interior", "simétrico", 
-           "implementación", "concreción", "transacción", "exclusión", "valores", "infinitos", "materiales",
-            "constante", "radicales", "significado", "adecuado", "voluntario", "sustancial", "presupuesto",
-            "disciplinar", "colectivo", "empresarial", "procesador", "activación", "esquemas", "concepción",
-            "personalidad", "finalidad", "visibilidad", "competencia", "privilegio", "mecánicas", "inversión",
-            "producción", "herramientas", "algoritmos", "efectividad", "análisis", "evolución", 
-            "procesamiento", "libertades", "justificación", "limitación", "orientación", "específico",
-            "operaciones", "regulaciones", "parámetros", "cualitativo", "profundidad", "automatización",
-            "sustentable", "vigilancia", "diseñador", "mantenimiento", "expresiones", "determinante",
-            "articulación", "colaboración", "instrumento", "decisiones", "crecimiento", "universales",
-            "prácticas", "transferencia", "formación", "constitución", "aplicaciones", "tecnológicas",
-            "coherencia", "producciones", "contextos", "dinámicas", "preferencias", "innovación", 
-            "evaluaciones", "sincronización", "verificación", "perspectiva", "programación",
-            "equivalentes", "funcionales", "administración", "inteligente", "experimentar",
-            "procesamiento", "planificación", "procedimientos", "consolidación", "representación",
-            "tecnologías", "publicación", "determinados", "simplificación"
-};
-        String ahorcado = Palabras[random.nextInt(200)];
-        Boolean [] letrasAdivinadas = new Boolean[ahorcado.length()];
+    public static final String[] palabras = {
+        "programacion", "tecnologia", "java", "computadora", 
+        "desarrollo", "ahorcado", "sistema", "algoritmo"
+    };
 
-         //sustituir las letras por guiones y poner las letras acertadas en los guiones
-         char [] ocultar = new char[ahorcado.length()];
+    public static final int MAX_INTENTOS = 6;
 
-         for(int i = 0; i < ahorcado.length(); i++){
-            ocultar[i] = '_';
-            letrasAdivinadas[i] = false;
-         }
+    public static String elegirPalabra() {
+        Random random = new Random();
+        return palabras[random.nextInt(palabras.length)];
+    }
 
-         //creo un arraylist que guardara las letras incorrectas introducidas por el usuario
-          ArrayList <Character> letrasIncorrectas = new ArrayList<Character>();
+    public static char[] ocultar(String palabra) {
+        char[] ocultarPalabra = new char[palabra.length()];
+        for (int i = 0; i < palabra.length(); i++) {
+            ocultarPalabra[i] = '_';
+        }
+        return ocultarPalabra;
+    }
 
-        while(intentos < 6){
-    
-            //pedir letra a usuario
-            System.out.println("introduce una letra ");
-            char letra = sc.nextLine().charAt(0);
-            boolean acertada = false;
-            
-
-            //comprobacion de de si la letra se ecuentra en la palabra elegida por el programa
-            for(int i = 0; i < ahorcado.length(); i++){
-                if(ahorcado.charAt(i) == letra){
-                    ocultar[i] = letra;
-                    letrasAdivinadas[i] = true;
-                    acertada = true;
-                }
+    public static boolean verificarLetra(String palabra, char letra, char[] ocultar, Boolean[] letrasAdivinadas) {
+        boolean acierto = false;
+        for (int i = 0; i < palabra.length(); i++) {
+            if (palabra.charAt(i) == letra && !letrasAdivinadas[i]) {
+                ocultar[i] = letra;
+                letrasAdivinadas[i] = true;
+                acierto = true;
             }
+        }
+        return acierto;
+    }
 
-            //muestra elprogreso y las letras acertadas
-                System.out.println(ocultar);
+    public static int registrarLetraIncorrecta(char letra, ArrayList<Character> letrasIncorrectas, int intentos) {
+        if (!letrasIncorrectas.contains(letra)) {
+            intentos++;
+            letrasIncorrectas.add(letra);
+            System.out.println("Letra incorrecta, intentos restantes: " + (MAX_INTENTOS - intentos));
+        } else {
+            System.out.println("Ya has introducido esa letra.");
+        }
+        return intentos;
+    }
 
-            //comprueba si has acertado la letra y en ese caso printea un mensaje si no printea otro mensaje y te dice cuantos intentos te quedan
-            if(acertada){
-                System.out.println("has acertado la letra!");
-            }else{
-                if(!letrasIncorrectas.contains(letra)){
-                    letrasIncorrectas.add(letra);
-                    intentos ++;
-                    System.out.println("la letra es incorrecta te quedan "+(6 - intentos)+" aciertos");
+    public static boolean todasAdivinadas(Boolean[] letrasAdivinadas) {
+        for (boolean adivinada : letrasAdivinadas) {
+            if (!adivinada) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void dibujarMonigote(int intentos) {
+        switch (intentos) {
+            case 0:
+                System.out.println("_____");
+                System.out.println("|   |");
+                System.out.println("|    ");
+                System.out.println("|    ");
+                System.out.println("|    ");
+                System.out.println("|    ");
+                System.out.println("|_____");
+                break;
+            case 1:
+                System.out.println("_____");
+                System.out.println("|   |");
+                System.out.println("|   0");
+                System.out.println("|    ");
+                System.out.println("|    ");
+                System.out.println("|    ");
+                System.out.println("|_____");
+                break;
+            case 2:
+                System.out.println("_____");
+                System.out.println("|   |");
+                System.out.println("|   0");
+                System.out.println("|   |");
+                System.out.println("|    ");
+                System.out.println("|    ");
+                System.out.println("|_____");
+                break;
+            case 3:
+                System.out.println("_____");
+                System.out.println("|   |");
+                System.out.println("|   0");
+                System.out.println("|  /|");
+                System.out.println("|    ");
+                System.out.println("|    ");
+                System.out.println("|_____");
+                break;
+            case 4:
+                System.out.println("_____");
+                System.out.println("|   |");
+                System.out.println("|   0");
+                System.out.println("|  /|\\");
+                System.out.println("|    ");
+                System.out.println("|    ");
+                System.out.println("|_____");
+                break;
+            case 5:
+                System.out.println("_____");
+                System.out.println("|   |");
+                System.out.println("|   0");
+                System.out.println("|  /|\\");
+                System.out.println("|  / ");
+                System.out.println("|    ");
+                System.out.println("|_____");
+                break;
+            case 6:
+                System.out.println("_____");
+                System.out.println("|   |");
+                System.out.println("|   0");
+                System.out.println("|  /|\\");
+                System.out.println("|  / \\");
+                System.out.println("|    ");
+                System.out.println("|_____");
+                break;
+        }
+    }
+
+    public static void mostrarEstadoJuego(char[] ocultar, ArrayList<Character> letrasIncorrectas, int intentos) {
+        System.out.println("Palabra: " + String.valueOf(ocultar));
+        System.out.println("Letras incorrectas: " + letrasIncorrectas);
+        dibujarMonigote(intentos);
+    }
+
+    public static char introducirLetra(Scanner sc) {
+        char letra = ' ';
+        boolean letraValida = false;
+
+        while (!letraValida) {
+            try{
+                System.out.print("Introduce una letra: ");
+                String input = sc.nextLine();
+        
+                if(input.isEmpty()){
+                    System.out.println("ERROR: no has introducido ninguna letra");
+                }else if(input.length() != 1 || !Character.isLetter(input.charAt(0))){
+                    System.out.println("ERROR: solo se admiten letras.");
                 }else{
-                    System.out.println("ya has introducido esta letra incorrecta antes. ");
+                    letra = input.charAt(0);
+                    letraValida = true;
                 }
-            }
-
-            System.out.println("letras incorrectas introducidas: "+letrasIncorrectas);
-
-            //commprobacion de si todas las letras estan adivinadas
-            boolean todasAdivinadas = false;
-
-            for(int i = 0; i < letrasAdivinadas.length; i++){
-                if(!letrasAdivinadas[i]){
-                    todasAdivinadas = false;
-                    break;
-                }
-            }
-            //al adivinar la palabra completa se reproduce el siguiente mensaje
-            if(todasAdivinadas){
-                todasAdivinadas = true;
-                System.out.println("enhorabuena has adivinado la palabra!");
-            }
-
-            // si agotas los intentos aparece el muneco ahorcado y un mensaje de perdiste
-            switch (intentos) {
-                case 1:
-                        System.out.println("_____");
-                        System.out.println("|   |");
-                        System.out.println("|   0");
-                        System.out.println("|    ");
-                        System.out.println("|    ");
-                        System.out.println("|    ");
-                        System.out.println("|_____");
-
-                    break;
-            
-                case 2:
-                        System.out.println("_____");
-                        System.out.println("|   |");
-                        System.out.println("|   0");
-                        System.out.println("|   |");
-                        System.out.println("|    ");
-                        System.out.println("|    ");
-                        System.out.println("|_____");
-                    break;
-
-                case 3:
-                        System.out.println("_____");
-                        System.out.println("|   |");
-                        System.out.println("|   0");
-                        System.out.println("|  /|");
-                        System.out.println("|    ");
-                        System.out.println("|    ");
-                        System.out.println("|_____");
-                    break;
-                
-                case 4:
-                        System.out.println("_____");
-                        System.out.println("|   |");
-                        System.out.println("|   0");
-                        System.out.println("|  /|\\");
-                        System.out.println("|    ");
-                        System.out.println("|    ");
-                        System.out.println("|_____");
-                    break;
-                    
-                case 5:
-                        System.out.println("_____");
-                        System.out.println("|   |");
-                        System.out.println("|   0");
-                        System.out.println("|  /|\\");
-                        System.out.println("|  / ");
-                        System.out.println("|    ");
-                        System.out.println("|_____");
-                    break;
-                    
-                case 6:
-                        System.out.println("_____");
-                        System.out.println("|   |");
-                        System.out.println("|   0");
-                        System.out.println("|  /|\\");
-                        System.out.println("|  / \\");
-                        System.out.println("|     ");
-                        System.out.println("|_____");
-                        System.out.println("has perdido, la parabra que debias adivinar era "+ ahorcado);
-                    break;
+            } catch (Exception e) {
+                System.out.println("ERROR: vuelva a intentarlo");
             }
         }
         
-    sc.close();
+           
+       
+       return letra; 
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String palabra = elegirPalabra();
+        char[] ocultarPalabra = ocultar(palabra);
+        Boolean[] letrasAdivinadas = new Boolean[palabra.length()];
+        
+        // Inicializar letras adivinadas a false
+        for (int i = 0; i < palabra.length(); i++) {
+            letrasAdivinadas[i] = false;
+        }
+
+        ArrayList<Character> letrasIncorrectas = new ArrayList<>();
+        int intentos = 0;
+
+        System.out.println("Bienvenido al Ahorcado");
+
+        while (intentos < MAX_INTENTOS) {
+            mostrarEstadoJuego(ocultarPalabra, letrasIncorrectas, intentos);
+            char letra = introducirLetra(sc);
+            boolean acierto = verificarLetra(palabra, letra, ocultarPalabra, letrasAdivinadas);
+
+            if (!acierto) {
+                intentos = registrarLetraIncorrecta(letra, letrasIncorrectas, intentos);
+            } else {
+                System.out.println("¡Letra correcta!");
+            }
+
+            if (todasAdivinadas(letrasAdivinadas)) {
+                System.out.println("¡Has adivinado la palabra! Felicidades: " + palabra);
+                break;
+            }
+
+            if (intentos == MAX_INTENTOS) {
+                System.out.println("Has perdido. La palabra correcta era: " + palabra);
+                dibujarMonigote(intentos);
+            }
+        }
+
+        sc.close();
     }
 }
