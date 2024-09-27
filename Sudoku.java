@@ -62,6 +62,7 @@ public class Sudoku {
     }
 
     public static boolean introducirNumero(int [][] Tablero, int fila, int col, int num, int size){
+        
         if(VerificarNumero(Tablero, fila, col, num, size)){//verifica si el numero se puede introducir y en ese caso lo introduce
             Tablero[fila][col] = num;
             return true;
@@ -105,14 +106,37 @@ public class Sudoku {
         }
     }
 
+    public static int obtenerInputEntero(Scanner sc, String mensaje) {//verifica si has introducido un dato incorrecto da un mensaje de error.
+        int input = -1;
+        boolean inputValido = false;
+
+        while (!inputValido) {
+            try {
+                System.out.print(mensaje);
+                String entrada = sc.nextLine().trim();
+
+                if (entrada.isEmpty()) {
+                    System.out.println("ERROR: No has introducido nada. Por favor, introduce un número.");
+                } else {
+                    input = Integer.parseInt(entrada);
+                    inputValido = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("ERROR: Entrada no válida. Solo se permiten números.");
+            }
+        }
+
+        return input;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         //pregunta al usuario que dificultad quiere seleccionar de entre estas 3 
-        System.out.println("seleccione el nivel de dificultad en qle que quiere jugar: ");
+        System.out.println("seleccione el nivel de dificultad en que que quiere jugar: ");
         System.out.println("1.Facil");
         System.out.println("2.Normal");
         System.out.println("3.Dificil");
-        int dificultad = sc.nextInt();
+        int dificultad = obtenerInputEntero(sc, "Elija una dificultad: ");
         int size = 0;
         int CeldaVacia = 0;
 
@@ -151,13 +175,10 @@ public class Sudoku {
 
         //se pide al usuario que introduzca un numero dando la posicion especifica
         while (true) {
-            System.out.println("Introduce la columna: ");
-            int col = sc.nextInt();
-            System.out.println("Introduce la fila: ");
-            int fila = sc.nextInt();
-            System.out.println("Introduce el número: ");
-            int num = sc.nextInt();
-            
+            int fila = obtenerInputEntero(sc, "Introduce la fila (0 a " + (size - 1) + "): ");
+            int col = obtenerInputEntero(sc, "Introduce la columna (0 a " + (size - 1) + "): ");
+            int num = obtenerInputEntero(sc, "Introduce el número: ");
+
             if (introducirNumero(Tablero, fila, col, num, size)) {
                 VerTablero(Tablero, size);
             }
