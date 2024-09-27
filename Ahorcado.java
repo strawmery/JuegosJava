@@ -129,8 +129,30 @@ public class Ahorcado {
     }
 
     public static char introducirLetra(Scanner sc) {
-        System.out.print("Introduce una letra: ");
-        return sc.nextLine().toLowerCase().charAt(0);
+        char letra = ' ';
+        boolean letraValida = false;
+
+        while (!letraValida) {
+            try{
+                System.out.print("Introduce una letra: ");
+                String input = sc.nextLine();
+        
+                if(input.isEmpty()){
+                    System.out.println("ERROR: no has introducido ninguna letra");
+                }else if(input.length() != 1 || !Character.isLetter(input.charAt(0))){
+                    System.out.println("ERROR: solo se admiten letras.");
+                }else{
+                    letra = input.charAt(0);
+                    letraValida = true;
+                }
+            } catch (Exception e) {
+                System.out.println("ERROR: vuelva a intentarlo");
+            }
+        }
+        
+           
+       
+       return letra; 
     }
 
     public static void main(String[] args) {
