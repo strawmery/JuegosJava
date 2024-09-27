@@ -5,16 +5,16 @@ public class Conecta4 {
 
     
     // PASO 1: declaración de variables
-    private static char j1 = 'X';
-    private static char j2 = 'O';
-    private static char[] jugadores = {j1, j2};
-    private static int jugadorActual = 0;
-    private static int filas = 6;
-    private static int columnas = 7;
-    private static char asterisco = '*';
-    private static char[][] tablero = new char [filas][columnas];
-    private static Scanner sc = new Scanner(System.in);
-    private static boolean juegoTerminado = false;
+    public static char j1 = 'X';
+    public static char j2 = 'O';
+    public static char[] jugadores = {j1, j2};
+    public static int jugadorActual = 0;
+    public static int filas = 6;
+    public static int columnas = 7;
+    public static char asterisco = '*';
+    public static char[][] tablero = new char [filas][columnas];
+    public static Scanner sc = new Scanner(System.in);
+    public static boolean juegoTerminado = false;
 
 
 
