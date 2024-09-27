@@ -42,6 +42,12 @@ public class Conecta4 {
     public static int elegirColumna(char jugador) {
         System.out.println(" ");
         System.out.println("Jugador " + "(" + jugadores[jugadorActual] + ")" + " elija una columna (0-6): ");
+        while (!sc.hasNextInt()) {
+            sc.next();
+            System.out.println(" ");
+            System.out.println("Por favor, jugador " + "(" + jugadores[jugadorActual] + ")" + " introduzca un número válido entre 0 y 6:");
+        }
+
         return sc.nextInt();
     }
 
